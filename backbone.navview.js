@@ -6,21 +6,45 @@ define(['backbone'], function(Backbone) {
 	var NavView = Backbone.View.extend({
 		initialize: function(options) {
 
-			this.routeAttr = options.routeAttr || 'data-route';
-			this.router = options.router;
+			_.bindAll(this,'handleNav');
+
+			// router
+			this.router = options.router || this.router;
+
+			this.routingElSelector = options.routingElSelector || this.routingElSelector;
+			this.retrieveRoute = options.retrieveRoute || this.retrieveRoute;
+			this.navigateOptions = options.navigateOptions || this.navigateOptions;
+			this.routingEvent = options.routingEvent || this.routingEvent;
+
+			this.$el.on(this.routingEvent, this.routingElSelector, this.handleNav);
 		},
 
-		events: {
-			'click a': 'navigate'
-		},
+		router: undefined,
 
-		navigate: function(e) {
+		/**
+		 * Selectors of the elements on which to listen for events.
+		 */
+		routingElSelector: 'a',
+		/**
+		 * method that returns the route to go to.
+		 */
+		retrieveRoute: function($el) { return $el.attr('data-route'); },
+		/**
+		 * options to be passed as second parameter to the router.navigate(route, options)
+		 */
+		navigateOptions: { trigger: true },
+		/**
+		 * Event that will be listened to
+		 */
+		routingEvent: 'click',
+
+		handleNav: function(e) {
 			e.preventDefault();
 
-			var $target = $(e.target),
-				route = $target.attr('data-route');
+			var $target = $(e.currentTarget),
+				route = this.retrieveRoute($target);
 
-			this.router.navigate(route, { trigger: true });
+			this.router.navigate(route, this.navigateOptions);
 		},
 	});
 
