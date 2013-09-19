@@ -1,0 +1,7 @@
+{
+  "name": "backbone.navview",
+  "version": "0.0.1",
+  "dependencies": {
+  },
+  "main": "backbone.navview.js"
+}
