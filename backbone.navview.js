@@ -44,8 +44,6 @@ define(['backbone'], function(Backbone) {
 			var $target = $(e.currentTarget),
 				route = this.retrieveRoute($target);
 
-			console.log(this.router)
-
 			this.router.navigate(route, this.navigateOptions);
 		},
 	});
