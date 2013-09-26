@@ -1,4 +1,4 @@
-define(['backbone.navview','backbone','jquery'], function(NavView, Backbone, $) {
+define(['../backbone.view.navigation','backbone','jquery'], function(NavView, Backbone, $) {
 
 
 	var router = window.router = new Backbone.Router({
@@ -22,7 +22,7 @@ define(['backbone.navview','backbone','jquery'], function(NavView, Backbone, $) 
 
 		navigateOptions: { trigger: true },
 
-		routingEvent: 'click',
+		routingEvent: 'mouseenter',
 	});
 
 
